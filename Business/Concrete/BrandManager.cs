@@ -37,10 +37,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public Brand GetById(Expression<Func<Brand, bool>> filter)
-        {
-            return _brandDal.GetById(filter);
-        }
+        
 
         public void Update(Brand brand)
         {

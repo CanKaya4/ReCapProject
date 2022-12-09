@@ -16,5 +16,7 @@ namespace DataAccess.Concrete
             //Data Source=CAN;Initial Catalog=CarProject;Integrated Security=True
         }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Color> Color { get; set; }
     }
 }

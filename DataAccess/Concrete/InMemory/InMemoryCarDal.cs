@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,11 +16,11 @@ namespace DataAccess.Concrete.InMemory
         {
             _car = new List<Car>()
             {
-                new Car {CarId = 1, BrandId = 1, ColorId = 1, Description = "TOFAŞ", ModelYear = new DateTime(2002,12,12)},
-                new Car {CarId = 2, BrandId = 2, ColorId = 2, Description = "BMW", ModelYear = new DateTime(2012,12,12)},
-                new Car {CarId = 3, BrandId = 1, ColorId = 2, Description = "TOFAŞ", ModelYear = new DateTime(2014,12,12)},
-                new Car {CarId = 4, BrandId = 3, ColorId = 3, Description = "MERCEDES", ModelYear = new DateTime(2022,12,12)},
-                new Car {CarId = 5, BrandId = 3, ColorId = 5, Description = "MERCEDES", ModelYear = new DateTime(2021,12,12)},
+                new Car {CarID = 1, BrandID = 1, ColorID = 1, Description = "TOFAŞ"},
+                new Car {CarID = 2, BrandID = 2, ColorID = 2, Description = "BMW",},
+                new Car {CarID = 3, BrandID = 1, ColorID = 2, Description = "TOFAŞ"},
+                new Car {CarID = 4, BrandID = 3, ColorID = 3, Description = "MERCEDES"},
+                new Car {CarID = 5, BrandID = 3, ColorID = 5, Description = "MERCEDES"},
             };
         }
         public void Add(Car car)
@@ -40,8 +41,13 @@ namespace DataAccess.Concrete.InMemory
             //}
             //_car.Remove(carToDeleted);
             //linq kullanımı
-            Car carToDeleted = _car.SingleOrDefault(p => p.CarId == car.CarId);
+            Car carToDeleted = _car.SingleOrDefault(p => p.CarID == car.CarID);
             _car.Remove(carToDeleted);
+        }
+
+        public Car Get(Expression<Func<Car, bool>> fiter)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Car> GetAll()
@@ -49,13 +55,18 @@ namespace DataAccess.Concrete.InMemory
             return _car;
         }
 
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Car car)
         {
-            Car carToUpdate = _car.SingleOrDefault(p=>p.CarId == car.CarId);
-            carToUpdate.ModelYear = car.ModelYear;
-            carToUpdate.BrandId = car.BrandId;
-            carToUpdate.ColorId = car.ColorId;
-           
+            Car carToUpdate = _car.SingleOrDefault(p => p.CarID == car.CarID);
+            
+            carToUpdate.BrandID = car.BrandID;
+            carToUpdate.ColorID = car.ColorID;
+
         }
     }
 }

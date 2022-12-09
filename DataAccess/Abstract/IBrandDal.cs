@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarDal: IEntityRepository<Car>
+    public interface IBrandDal : IEntityRepository<Brand>
     {
-       
+        Brand GetById(Expression<Func<Brand, bool>> filter);
     }
 }

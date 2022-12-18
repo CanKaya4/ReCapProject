@@ -8,8 +8,14 @@ class Program
 {
     static void Main(string[] args)
     {
+        UserManager userManager = new UserManager(new EfUserDal());
+        var result = userManager.GetAll();
+        foreach (var item in result.Message)
+        {
+            Console.WriteLine(item);
+        }
         //CarTest();
-        DtoTest();
+        //DtoTest();
     }
 
     private static void DtoTest()

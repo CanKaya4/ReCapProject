@@ -8,13 +8,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        UserManager userManager = new UserManager(new EfUserDal());
-        var result = userManager.GetAll();
-        foreach (var item in result.Message)
-        {
-            Console.WriteLine(item);
-        }
-        //CarTest();
+       
+        CarTest();
         //DtoTest();
     }
 
@@ -39,10 +34,19 @@ class Program
     private static void CarTest()
     {
         CarManager carManager = new CarManager(new EfCarDal());
-        foreach (var item in carManager.GetAll().Data)
-        {
-            Console.WriteLine("Car ID : " + item.CarID + " Car name : " + item.CarName + " Brand ID : " + item.BrandID + " Color ID : " + item.ColorID + " Daily Price : " + item.DailyPrice + " ModelYear : " + item.ModelYear + " Description : " + item.Description);
+        var result = carManager.GetAll();
 
+        if (result.Success == true)
+        {
+            foreach (var item in result.Data)
+            {
+                Console.WriteLine(item.CarName);
+            }
         }
+        else
+        {
+            Console.WriteLine(result.Message);
+        }
+       
     }
 }

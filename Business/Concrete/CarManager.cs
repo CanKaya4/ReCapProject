@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour==22)
+            if (DateTime.Now.Hour==12)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
@@ -34,6 +34,7 @@ namespace Business.Concrete
         {
             if (car.Description.Length >2 && car.DailyPrice >0)
             {
+                _carDal.Add(car);
                 return new SuccessResult(Messages.CarAdded);
             }
             else

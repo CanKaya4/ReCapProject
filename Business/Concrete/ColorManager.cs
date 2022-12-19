@@ -1,4 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities;
+using Core.Utilities.Result;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -11,35 +15,37 @@ namespace Business.Concrete
 {
     public class ColorManager : IColorService
     {
-        IColorService _colorService;
-        public ColorManager(IColorService colorService)
+        IColorDal _colorDal;
+
+        public ColorManager(IColorDal colorDal)
         {
-            _colorService = colorService;
+            _colorDal = colorDal;
         }
 
-        public void Add(Brand brand)
+        public IResult Add(Color color)
         {
-           _colorService.Add(brand);
-       }
-
-        public void Delete(Brand brand)
-        {
-            _colorService.Delete(brand);
+            _colorDal.Add(color);
+            return new SuccessResult(Messages.ColorAdded);
         }
 
-        public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
+        public IResult Delete(Color color)
         {
-            return _colorService.GetAll(filter);
+            return new SuccessResult(Messages.ColorDeleted);
         }
 
-        public Brand GetById(Expression<Func<Brand, bool>> filter)
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorService.GetById(filter);
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ColorListed);
         }
 
-        public void Update(Brand brand)
+        public IDataResult<Color> GetById(int id)
         {
-           _colorService.Update(brand);
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id),Messages.ColorById);
+        }
+
+        public IResult Update(Color color)
+        {
+            return new SuccessResult(Messages.ColorUpdated);
         }
     }
 }

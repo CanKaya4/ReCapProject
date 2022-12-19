@@ -28,24 +28,24 @@ namespace Business.Concrete
                 _userDal.Add(user);
                 return new SuccessResult(Messages.Added);
             }
-            return new ErrorResult(Messages.CarNameInvalid);
+            return new ErrorResult(Messages.UserNameInvalid);
         }
 
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
-            return new SuccessResult(Messages.Deleted);
+            return new SuccessResult(Messages.UserDeleted);
         }
 
         public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.CarListed);
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.UserListed);
         }
 
         public IResult Update(User user)
         {
            _userDal.Update(user);
-            return new SuccessResult(Messages.Updated);
+            return new SuccessResult(Messages.UserUpdated);
         }
     }
 }

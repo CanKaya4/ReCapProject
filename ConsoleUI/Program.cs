@@ -17,7 +17,16 @@ Ekletikten sonra FluentValidation klasörü altında oluşturacağımız classla
 Örneğin CarValidator veya ColorValidator gibi. CarValidator classı açıyoruz. Bu classın içerisinde CarName gibi Car için verilen propertylere ayar vereceğiz.
 AbstractValidator sınıfından inherit etmemiz gerekiyor, FluentValidaton classlarımızı. AbstractValidator, kurduğumuz FluentValidation paketinden geliyor.
 AbstractValidator'a hangi nesne ile çalışıyorsak onu vermemmiz lazım. Örneğin CarValidator için AbstractValidator<Car> gibi.
- * 
+AOP : Örneğin metotlarınızı loglamak istiyorsunuz. Bir metot ya başında, sonunda veya hata verdiğinde loglanır. Uygulamanın başında sonunda veya hata verdiğinde çalışmasını istediğin kodların varsa
+Onları AOP yöntemi ile dizayn edebiliriz. Dolayısıyla uygulamanın belli yerleride sürekli try catch yapısı kalmak zorunda kalmayız veya her yerde loglama kodlarını yazmak zorunda kalmayız.
+Bu yönteme Interceptor deniyor. Interceptor kelime anlamı araya girmek demektir, metodun başında sonunda veya hata verdiğinde gibi.
+Validation(Doğrulama),log,cache gibi yapıları, metotların üstüne Attribute olark ekleriz.
+Attribute : Propertylere, metotlara, classlara vs anlam yüklemek için kullanılan yapılardır.
+Projemize Core katmanı içerisine Utilities içerisine Interceptors klasörü ekleyeceğiz. Açıklama notları Interceptor içerisinde
+
+
+Core katmanı içerisine Aspects isimli klasör ekle, altına da hangi teknloji kullnarak aspect yazılacaksa onu klasörle, Autofac ile yazağım için Autofac klasörü açıyorum.
+Autofac içerisinde şuan Validation yazacağımız için Validation klasörü ekle
  * 
  * 
  * 

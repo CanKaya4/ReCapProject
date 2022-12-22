@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities;
 using Core.Utilities.Result;
@@ -10,6 +11,7 @@ using Entities.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +35,7 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
         }
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             #region Spagetti kod
@@ -53,12 +56,16 @@ namespace Business.Concrete
             //var result = carValidator.Validate(context);
 
             //result eğer IsValid değilse yani geçersiz ise hata döndür.
-            //Test edildi çalışıyor ancak refactor edilmemsi gerekmekte.
 
             //if (!result.IsValid)
             //{
             //    throw new ValidationException(result.Errors); 
             //}
+
+
+            //Test edildi çalışıyor ancak refactor edilmemsi gerekmekte.
+
+
             #endregion
 
             #region Tool
@@ -81,13 +88,18 @@ namespace Business.Concrete
 
             //ValidationTool isimli static bir class oluşturdum. Static olduğu için newlemeye gerek yok.
             //Class içerisine de Validate isimli bir metod oluşturdum. Spagetti kodu orada refactor ettim.
-            ValidationTool.Validate(new CarValidator(), car);
+           // ValidationTool.Validate(new CarValidator(), car);
             //Test edildi çalışıyor.
             //Burada Business kodlarım olucak şimdi ise ben Validation kodlarımı Attribute olarak vermek isrityorum.
             //Yani Add metodumun üstne [Validate] eklediğimde bu validate gidip otmaatik olarak add metodumun paratmetresini okuyacak
             //İlgili validator'u ve car nesnesini bulup validate edicek. Böyle bir yapı kuracağım.
             #endregion
-
+            #region Attribute
+            /*Standart kodlar olduğu için EnginDemiroğ githundan alacağız.
+             * https://github.com/engindemirog/NetCoreBackend kodları buradan alıyoruz.
+             * 
+             */
+            #endregion
 
 
             _carDal.Add(car);
